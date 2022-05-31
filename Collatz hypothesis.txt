@@ -1,0 +1,169 @@
+#include <stdio.h>
+#include <math.h>
+int special_numbers(const int input_array[], const int array_size, int result_array[]);
+unsigned long special_counter(const int input_array[], const int array_size);
+int array_min(const int input_array[], const int array_size);
+int array_max(const int input_array[], const int array_size);
+double factorial(const int n);
+unsigned  long long sum_squared(const int line);
+void counter(const int input_array[], const int array_size, int result_array[2]);
+float unit_price(const float pack_price, const int rolls_count, const int pieces_count);
+float lift_a_car(const int stick_length, const int human_weight, const int car_weight);
+int collatz(const int number);
+int opposite_number(const int n, const int number);
+int main(){
+int input_array[] = {16,17,4,3,5,2};
+int result_array[6];
+int count = special_numbers(input_array, 6, result_array);
+for(int i = 0; i < count; i++){
+    printf("%d ", result_array[i]);
+}
+printf("\n");
+// prints: 17 5 2
+//int input_array[] = {1,2,3,4,5};
+//int input_array[] = {11,12,13,14,15};
+//printf("%lu\n", special_counter(input_array, 5));
+// prints: 379
+//printf("%d\n", array_min(input_array, 5));
+// prints: 1
+//printf("%d\n", array_max(input_array, 5));
+// prints: 5
+//printf("%d\n", array_max(NULL, 5));
+// prints: -1
+//printf("%.4f\n", lift_a_car(4, 90, 1650));
+//printf("%.4f\n",unit_price(5.63, 20, 200));
+//printf("%d\n", collatz(456));
+//printf("%d\n", opposite_number(10, 9));
+//int input_array[] = {1,2,3,4,5};
+//int result_array[2];
+//printf("%llu\n", factorial (5));
+//printf("%llu\n", sum_squared(1));
+// prints: 2
+//printf("%llu\n", sum_squared(4));
+// prints: 70
+//printf("%llu\n", sum_squared(39));
+// prints: 7219428434016265740
+
+//counter(input_array, 5, result_array);
+//printf("%d %d\n", result_array[0], result_array[1]);
+// prints: 9 6
+}
+float lift_a_car(const int stick_length, const int human_weight, const int car_weight){
+ float hren;
+ hren = (stick_length*(human_weight+0.0)/(car_weight+(human_weight)));
+ hren = round(hren*100)/100;
+ return hren;
+}
+float unit_price(const float pack_price, const int rolls_count, const int pieces_count){
+ float change;
+ change = (pack_price/(pieces_count*rolls_count))*100;
+ change = round(change*100)/100;
+ return change;
+}
+int collatz(const int number){
+ int stress=number,yarik=1;
+ while (stress!=1){
+  if(stress%2==0){
+   stress=stress/2;
+  }else{
+   stress=3*stress+1;
+  }
+  yarik++;
+ }
+ return yarik;
+}
+int opposite_number(const int n, const int number){
+ int cola;
+ if (n/2 > number){
+  cola = (n / 2) + number;
+ }else if (n/2 < number){
+  cola = number - (n/2);
+ }else if (n/2 == number){
+  cola = 0;
+ }
+ return cola;
+}
+void counter(const int input_array[], const int array_size, int result_array[2]){
+ result_array[0]=0;
+ result_array[1]=0;
+ for (int i = 0; i < array_size; i++){
+  if(i%2==0){
+   result_array[0] = input_array[i]+result_array[0];
+  }else if(i%2!=0){
+   result_array[1] = input_array[i]+result_array[1];
+  }
+ }
+}
+double  factorial(const int n){
+ double fuck = 1;
+ for (int i = 1; i <= n; i++){
+  fuck *= i;
+ }
+ return fuck;
+}
+/* unsigned long long factorial(int n){
+ *  if(n!=0){
+ *  return n*factorial(n-1);
+ *  }else return 1;
+ * }
+ */
+unsigned long long sum_squared(const int line){
+ unsigned long long summa = 0, iphone;
+ for (int i = 0; i < line + 1; i++){
+  iphone = factorial (line)/(factorial(i)*factorial(line - i));
+  printf("%llu\n",iphone);
+  summa += iphone*iphone;
+ }
+ return summa;
+}
+int array_min(const int input_array[], const int array_size){
+ if (input_array==NULL){
+  return -1;
+ }
+ int min = input_array[0];
+ for (int index=1; index < array_size; index++){
+  if(min > input_array[index]){
+   min = input_array[index];
+  }
+
+ }
+ return min;
+}
+int array_max(const int input_array[], const int array_size){
+ if (input_array==NULL){
+  return -1;
+ }
+ int maxim = input_array[0];
+ for (int index = 1; index < array_size; index++){
+  if (maxim < input_array[index]){
+   maxim = input_array[index];
+  }
+ }
+ return maxim;
+}
+unsigned long special_counter(const int input_array[], const int array_size){
+ unsigned long summa=0;
+ for (int index=0; index < array_size; index++){
+  if (index%2==0){
+   summa += input_array[index];
+  }else {
+   summa += input_array[index]*input_array[index]; 
+  }
+ }
+ return summa;
+}
+int special_numbers(const int input_array[], const int array_size, int result_array[]){
+ int count = 0;
+ long summa = 0;
+ for (int index=0; index < array_size; index++){
+  summa = 0;
+  for (int zaebal_karlusha = index+1; zaebal_karlusha < array_size; zaebal_karlusha++){
+   summa += input_array[zaebal_karlusha];
+  }
+  if ((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((input_array[index] > summa)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))){
+   result_array[count]=input_array[index];
+   count++;
+  }
+ }
+ return count;
+}
