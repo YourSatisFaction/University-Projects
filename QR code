@@ -1,0 +1,144 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+void blocks_to_bytes(const int cols, const int offset, bool blocks[offset*8][cols], const int rows, bool bytes[rows][8]);
+void bytes_to_blocks(const int cols, const int offset, bool blocks[offset*8][cols], const int rows, bool bytes[rows][8]);
+void decode_bytes(const int rows, bool bytes[rows][8], char string[rows]);
+void encode_string(const char string[], bool bytes[strlen(string)+1][8]);
+char decode_byte(const bool bits[8]);
+int stage(int i);
+void encode_char(const char character, bool bits[8]);
+int main (){
+/*int length = 4+1, cols = 3, offset = 2;
+bool bytes1[4+1][8] = {
+    {0,1,0,0,0,0,0,1},
+    {0,1,1,0,1,0,0,0},
+    {0,1,1,0,1,1,1,1},
+    {0,1,1,0,1,0,1,0},
+    {0,0,0,0,0,0,0,0}
+};
+bool blocks1[offset*8][cols];
+bytes_to_blocks(cols, offset, blocks1, length, bytes1);
+for(int j = 0; j < offset*8; j++){
+    for(int i = 0; i < cols; i++){
+        printf("%d ", (blocks1[j][i] == true) ? 1 : 0);
+    }
+    printf("\n");
+    if(j % 8 == 7){
+        printf("\n");
+    }
+}
+bool blocks2[2*8][3] = {
+    {0,0,0},
+    {1,1,1},
+    {0,1,1},
+    {0,0,0},
+    {0,1,1},
+    {0,0,1},
+    {0,0,1},
+    {1,0,1},
+    {0,0,0},
+    {1,0,0},
+    {1,0,0},
+    {0,0,0},
+    {1,0,0},
+    {0,0,0},
+    {1,0,0},
+    {0,0,0}
+};
+bool bytes2[length][8];
+blocks_to_bytes(3, 2, blocks2, length, bytes2);
+for(int j = 0; j < length; j++){
+    for(int i = 0; i < 8; i++){
+        printf("%d", bytes2[j][i]);
+    }
+    printf("\n");
+}*/
+}
+void encode_char(const char character, bool bits[8]){
+ int change=character, i;
+ for (i=7; 0<=i; i--){
+  bits[i]= change%2;
+  change=change/2;
+ }
+}
+char decode_byte(const bool bits[8]){
+    char shtany;
+ int misha=0, i;
+ for (i=7; i!=-1; i--){
+  if (bits[7-i]==1){
+   misha+=stage(i);
+  
+  }
+ }
+ shtany=misha;
+ return shtany;
+}
+int stage(int i){
+ int number=1,j;
+
+ for (j=1; j<=i; j++){
+  number*=2;
+ }
+ return number;
+}
+void encode_string(const char string[], bool bytes[strlen(string)+1][8]){
+ bool bits[8];
+ for (int i=0; i<strlen(string)+1; i++){
+  encode_char(string[i], bits);
+  for (int j=0; j<8; j++){
+   bytes[i][j]=bits[j];
+   
+  }
+ }
+}
+void decode_bytes(const int rows, bool bytes[rows][8], char string[rows]){
+ int i,j;
+ bool bits[8];
+ for(i=0;i<rows;i++){
+  for(j=0;j<8;j++){
+   bits[j]=bytes[i][j];
+  }
+  string[i]=decode_byte(bits);
+
+
+ }
+}
+void bytes_to_blocks(const int cols, const int offset, bool blocks[offset*8][cols], const int rows, bool bytes[rows][8]){
+// bool bits1[8], bits2[8];
+ int i, j,r=0,t=0;
+ for(i=0;i<offset*8;i++){
+  for(j=0;j<cols;j++){
+   blocks[i][j]=0;
+  }
+ }
+ for (i=0;i<offset*8; i+=8){
+  for (j=0; j<cols; j++){
+   for(int k=0;k<8;k++){
+    if(r<rows){
+     blocks[i+k][j]=bytes[r+t][k];
+    }else return;
+   }
+   r++;
+  }
+ }
+}
+
+void blocks_to_bytes(const int cols, const int offset, bool blocks[offset*8][cols], const int rows, bool bytes[rows][8]){
+    int i,j,t=0,r=0;
+ for(i=0;i<rows;i++){
+  for(j=0;j<8;j++){
+   bytes[i][j]=0;
+  }
+ }
+ for(i=0;i<offset*8;i+=8){
+  for(j=0;j<cols;j++){
+   for(int k=0;k<8;k++){
+    if(rows>r){
+     bytes[r+t][k]=blocks[i+k][j];
+    }else return;
+   }
+   r++;
+  }
+ }
+}
